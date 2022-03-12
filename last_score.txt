@@ -1,0 +1,2 @@
+Average time: 3.86 s
+Your score is 18.
