@@ -1,5 +1,31 @@
 import random
 import time
+import os
+import sqlite3
+os.system("reset")
+data = sqlite3.connect("accounts.db")
+cursor = data.cursor()
+c2 = data.cursor()
+try:
+    lask = input("Username: ")
+    cursor.execute("SELECT * FROM " + lask)
+    pss = cursor.fetchall()
+    
+except:
+    print("Sorry, that user does not exist.")
+    exit()
+
+try:
+    lask = input("Password: ")
+    c2.execute("SELECT * FROM " + lask)
+    pss2 = c2.fetchall()
+
+except:
+    print("Sorry, wrong password.")
+    exit()
+
+data.commit()
+data.close()
 
 score = 0
 #Change the value below to change the number of questions.
@@ -22,8 +48,7 @@ while questions != 0:
     et = (time.time() - st) / (20 - questions)
     print("Average time: %4.2f s" % (et))
 
-print("\nYour score is " + str(score) + ".")
-
+print("\nYour score is " + str(score) + ".") 
 with open("last_score.txt", "w") as s:
-    s.write("Average time: %4.2f s" % (et) + "\nYour score is " + str(score) + ".")
+    s.write("Average time: %4.2f s" % (et) + "\nYour score is " + str(score) + ".\n")
     s.close()
