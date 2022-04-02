@@ -3,5 +3,10 @@ import getpass
 import time
 user = getpass.getuser()
 print("Hello, " + user + "!")
-time.sleep(1)
-creornot = input("Would you like to create an account for the Tester? (y/n) ")
+data = sqlite3.connect("accounts.db")
+crsr = data.cursor()
+user = input("Create Username: ")
+passx = input("Create Password: ")
+crsr.execute('INSERT INTO users VALUES ("' + user + '", "' + passx + '")')
+data.commit()
+data.close()
