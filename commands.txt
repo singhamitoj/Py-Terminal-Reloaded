@@ -1,0 +1,4 @@
+COMMANDS FOR SHELL:
+tester (Launches tester)
+os (Shows OS type)
+exit (Exits)
