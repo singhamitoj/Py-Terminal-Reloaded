@@ -2,3 +2,5 @@ COMMANDS FOR SHELL:
 tester (Launches tester)
 os (Shows OS type)
 exit (Exits)
+dice (Chooses a random number from 1-6)
+help (Shows this text)
