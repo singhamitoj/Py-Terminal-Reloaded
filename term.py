@@ -70,10 +70,10 @@ def log2():
 
 
     if login(uip_usrname, uip_usrpass) == True:
-        print("Wow, it works!")
+        print("Login successful.")
 
     else:
-        print("Wow, I never really needed this!")
+        print("Login unsuccessful.")
         exit(1)
 
 
@@ -94,6 +94,9 @@ def log2():
             exit(0)
         elif command == "logout":
             break
+        elif command == "help":
+            os.system("cat commands.txt")
+
         else:
             print("Sorry, that command doesn't exist (yet).")
 
