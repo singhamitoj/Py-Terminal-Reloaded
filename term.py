@@ -94,6 +94,8 @@ def log2():
             exit(0)
         elif command == "logout":
             break
+        else:
+            print("Sorry, that command doesn't exist (yet).")
 
 while True:
     log2()
