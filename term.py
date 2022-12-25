@@ -39,22 +39,49 @@ def weapon():
 #        t.write(str(saved))
 #        t.close()
 
-def text_editor():
+writetxt = ""
+svedlg = ""
+filename = ""
+svefle = ""
+svedlg = ""
 
+# Updated text editor. Now, you can save to multiple files.
+def text_editor():
+    global writetxt
     editor = tkinter.Tk()
     editor.title("Text Editor")
     textbox = tkinter.Text(editor, height=15)
+    window.configure(bg="white")
+    svedlg = tkinter.Tk()
+    svedlg.title("Save Text Document")
+    filename = tkinter.Text(svedlg, height=15)
+   # def savetext2():
+    #    global svedlg
+     #   global writetxt
+      #  global svefle
+       # global filename
+        #svedlg.title("Save Text Document")
+        #filename = tkinter.text(svedlg, height=3)
+        #writetxt = filename.get("1.0", tkinter.END)
     def savetext():
+        global writetxt
+        global svedlg
         saved = textbox.get("1.0", tkinter.END)
         print(saved)
-        with open("text.txt", "w") as t:
+        writetxt = filename.get("1.0", tkinter.END)
+        writetxt2 = writetxt.replace("?", "") 
+        with open(writetxt2 + ".txt", "w") as t:
             t.write(str(saved))
             t.close()
-    svebtn = tkinter.Button(editor, text="Save", command=savetext, bg="green")
+    #svebtn = tkinter.Button(editor, text="Save", command=savetext, bg="green")
+    svefle = tkinter.Button(svedlg, text="Save", command=savetext)
     textbox.pack()
-    svebtn.pack()
+    #svebtn.pack()
+    filename.pack()
+    svefle.pack()
     while True:
         editor.update()
+        svedlg.update()
 
 
 def upd():
