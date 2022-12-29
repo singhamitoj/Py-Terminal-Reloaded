@@ -4,3 +4,6 @@ os (Shows OS type)
 exit (Exits)
 dice (Chooses a random number from 1-6)
 help (Shows this text)
+gui (Opens the GUI interface)
+logout (Logs the user out and goes to the login screen)
+For more help on the text editor, type "help text" in the console.

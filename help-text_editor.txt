@@ -1,0 +1,4 @@
+How to use the text editor:
+In the window that does not have a button, you can enter your text in there.
+In the window with a Save button, you can enter the filename you want your text file to have. You can overwrite files, too.
+Text files are always saved in the directory of the code. You can move the file once you've saved it.

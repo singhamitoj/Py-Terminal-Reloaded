@@ -4,6 +4,9 @@
 # Usename: dev
 # Password: alpine
 
+# Change this to change the background color of GOS.
+color = "cyan"
+
 import random
 import time
 import os
@@ -27,17 +30,9 @@ save = 0
 
 def backtoshell():
     window.destroy()
-    print("GOSDP has been closed. Press CTRL-C to go back to the shell.")
 
 def weapon():
     webbrowser.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-
-#def savetext():
-#    saved = textbox.get("1.0", END)
-#    print(saved)
-#    with open("text.txt", "rw") as t:
-#        t.write(str(saved))
-#        t.close()
 
 writetxt = ""
 svedlg = ""
@@ -55,14 +50,6 @@ def text_editor():
     svedlg = tkinter.Tk()
     svedlg.title("Save Text Document")
     filename = tkinter.Text(svedlg, height=15)
-   # def savetext2():
-    #    global svedlg
-     #   global writetxt
-      #  global svefle
-       # global filename
-        #svedlg.title("Save Text Document")
-        #filename = tkinter.text(svedlg, height=3)
-        #writetxt = filename.get("1.0", tkinter.END)
     def savetext():
         global writetxt
         global svedlg
@@ -73,23 +60,26 @@ def text_editor():
         with open(writetxt2 + ".txt", "w") as t:
             t.write(str(saved))
             t.close()
-    #svebtn = tkinter.Button(editor, text="Save", command=savetext, bg="green")
+    def exittxtf():
+        editor.destroy()
+        svedlg.destroy()
     svefle = tkinter.Button(svedlg, text="Save", command=savetext)
+    exittxt = tkinter.Button(svedlg, text="Exit", command=exittxtf)
     textbox.pack()
-    #svebtn.pack()
     filename.pack()
     svefle.pack()
+    exittxt.pack()
     while True:
         editor.update()
         svedlg.update()
 
-
+# Clicker game finally works!
 def upd():
-#    updscore=1
     global score
     global scorelab
     score = score + 1
-    scorelab.config(text=str(score))
+    scorelab.delete("1.0", "end")
+    scorelab.insert("1.0", "Clicks: " + str(score))
     scorelab.pack()
 
 def clicker_game():
@@ -110,45 +100,24 @@ def clicker_game():
     scorelab.pack()
     while True:
         clicker.update()
-        #if updscore == 1:
-        #    score = score + 1
-        #    scorelab.config(text=str(score))
-        #    scorelab.pack()
-        #    updscore = 0
 
-#def updscore():
-#    clickme.pack_forget()
-#    score = 0
-#    score = score + 1
-#    clickme = tkinter.Button(clicker, text=str(score), command=updscore=1, bg="yellow")
-#    clickme.pack()
-
-
-# The GUI function DOES NOT work as of now. Use the command only for testing and development purposes.
 def gos():
-    #print("This command has been disabled due to being incomplete. Remove this text and uncomment the lines below to re-enable it.")
     global window
     window = tkinter.Tk()
     window.title("GOS Development Prototype")
-    window.configure(bg="cyan")
+    window.configure(bg=color)
     window.geometry("1366x768")
-    #wallpaper = tkinter.PhotoImage(file="Retro.png", master=window)
-    #label = tkinter.Label(window, image=wallpaper)
-    #label.place(x=0, y=0)
     shell = tkinter.Button(window, text = "Exit to Shell", command=backtoshell, bg="red")
     shell.place(x=5, y=-25)
     rickroll = tkinter.Button(window, text = "Self-Destruct", command=weapon, bg="red")
-    #cam = tkinter.Button(window, text = "Camera Test App", command=print("Sorry, this is under development!"), bg="yellow")
     game1 = tkinter.Button(window, text="Simple Clicker Game", command=clicker_game, bg="yellow")
     textedit = tkinter.Button(window, text="Text Editor", command=text_editor, bg="blue")
-    #cam.place(x=-5, y=-25)
     game1.place(x=-5, y=-25)
     game1.place(x=-5, y=-26)
     shell.pack()
     rickroll.pack()
     game1.pack()
     textedit.pack()
-    #cam.pack()
     try:
         while True:
             window.update()
@@ -160,14 +129,10 @@ def login(username, usrpass):
     try:
         data = sqlite3.connect("accounts.db")
         crsr = data.cursor()
-       #protect against SQL Injection - use parameterised queries & do not use executescript()
-       # crsr.execute("SELECT * FROM users WHERE uid=? AND pass=?",(username,usrpass))
         crsr.execute("SELECT * FROM users WHERE uid=? AND pass=?",(username,usrpass))
         if crsr.fetchone():
-          #  print("Allow Login")
             return (True)
         else:
-           # print("Disallow Login")
             return (False)
     except:
         print("Sorry, that user does not exist.")
@@ -245,11 +210,21 @@ def log2():
                 os.system("cat commands.txt")
             elif cos == "Windows":
                 os.system("TYPE commands.txt")
+        elif command == "help text":
+            if cos == "Linux" or "Darwin":
+                os.system("cat help-text_editor.txt")
+            elif cos == "Windows":
+                os.system("TYPE commands.txt")
         elif command == "gui":
             gos()
+        elif command == "ls":
+            if cos == "Linux" or "Darwin":
+                os.system("ls")
+            elif cos == "Windows":
+                os.system("dir")
 
         else:
-            print("Sorry, that command doesn't exist (yet).")
+            print("Sorry, that command doesn't exist.")
 
 while True:
     log2()
